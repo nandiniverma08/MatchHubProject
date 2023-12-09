@@ -1,5 +1,8 @@
 package com.matchhub.serviceImpl;
 
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +21,14 @@ public class MatchServiceImpl implements MatchService{
 		return matchRepository.save(match);
 
 	}
+
+
+	@Override
+	public List<Match> getMatchesByDate(Date matchDate) {
+		return matchRepository.findByDate(matchDate);
+	}
+	
+	
 
 
 

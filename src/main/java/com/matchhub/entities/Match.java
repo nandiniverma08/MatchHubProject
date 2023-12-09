@@ -10,6 +10,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,7 +23,6 @@ import lombok.NoArgsConstructor;
 @Table(name = "cricket_table")
 public class Match {
 
-
 	@Id
 	@Column(name = "id")
 	private int id;
@@ -30,6 +31,7 @@ public class Match {
 	private String venue;
 
 	@Column(name = "match_date")
+	@Temporal(TemporalType.DATE)
 	private Date date;
 
 	@Column(name = "player_of_match")
@@ -42,87 +44,68 @@ public class Match {
 	private String winByRuns;
 
 	@OneToMany(targetEntity = Team.class, cascade = CascadeType.ALL)
-	@JoinColumn(name = "match_id" , referencedColumnName = "id")
+	@JoinColumn(name = "match_id", referencedColumnName = "id")
 	private List<Team> teams;
 
-	
 	public Match() {
-		
-	}
 
+	}
 
 	public int getId() {
 		return id;
 	}
 
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
 
 	public String getVenue() {
 		return venue;
 	}
 
-
 	public void setVenue(String venue) {
 		this.venue = venue;
 	}
-
 
 	public Date getDate() {
 		return date;
 	}
 
-
 	public void setDate(Date date) {
 		this.date = date;
 	}
-
 
 	public String getPlayerOfMatch() {
 		return playerOfMatch;
 	}
 
-
 	public void setPlayerOfMatch(String playerOfMatch) {
 		this.playerOfMatch = playerOfMatch;
 	}
-
 
 	public String getResultWin() {
 		return resultWin;
 	}
 
-
 	public void setResultWin(String resultWin) {
 		this.resultWin = resultWin;
 	}
-
 
 	public String getWinByRuns() {
 		return winByRuns;
 	}
 
-
 	public void setWinByRuns(String winByRuns) {
 		this.winByRuns = winByRuns;
 	}
-
 
 	public List<Team> getTeams() {
 		return teams;
 	}
 
-
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
-
-	
-	
-	
 
 	public Match(int id, String venue, Date date, String playerOfMatch, String resultWin, String winByRuns,
 			List<Team> teams) {
@@ -136,24 +119,10 @@ public class Match {
 		this.teams = teams;
 	}
 
-
 	@Override
 	public String toString() {
 		return "Match [id=" + id + ", venue=" + venue + ", date=" + date + ", playerOfMatch=" + playerOfMatch
 				+ ", resultWin=" + resultWin + ", winByRuns=" + winByRuns + ", teams=" + teams + "]";
 	}
-	
-	
-	
-	
-	
-
-  
- 
-
-	
-
 
 }
-
-
