@@ -1,12 +1,14 @@
 package com.matchhub.entities;
 
 import java.util.Date;
+import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,57 +23,32 @@ public class Match {
 
 
 	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private int id;
+	@Column(name = "id")
+	private int id;
 
-    @Column(name = "match_id")
-    private int matchId;
+	@Column(name = "venue")
+	private String venue;
 
-    @Column(name = "teamA")
-    private String teamA;
+	@Column(name = "match_date")
+	private Date date;
 
-    @Column(name = "teamB")
-    private String teamB;
+	@Column(name = "player_of_match")
+	private String playerOfMatch;
 
-    @Column(name = "venue")
-    private String venue;
+	@Column(name = "result_win")
+	private String resultWin;
 
-    @Column(name = "player_of_match")
-    private String playerOfMatch;
+	@Column(name = "win_by_runs")
+	private String winByRuns;
 
-    @Column(name = "result_win")
-    private String resultWin;
+	@OneToMany(targetEntity = Team.class, cascade = CascadeType.ALL)
+	@JoinColumn(name = "match_id" , referencedColumnName = "id")
+	private List<Team> teams;
 
-    @Column(name = "win_by_runs")
-    private String winByRuns;
-    
-    @Column(name = "match_date")
-    private Date date;
-
-
-  
- 
-
-    public Date getDate() {
-		return date;
-	}
-
-
-
-
-	public void setDate(Date date) {
-		this.date = date;
-	}
-
-
-
-
+	
 	public Match() {
-
-    }
-
-
+		
+	}
 
 
 	public int getId() {
@@ -79,55 +56,9 @@ public class Match {
 	}
 
 
-
-
 	public void setId(int id) {
 		this.id = id;
 	}
-
-
-
-
-	public int getMatchId() {
-		return matchId;
-	}
-
-
-
-
-	public void setMatchId(int matchId) {
-		this.matchId = matchId;
-	}
-
-
-
-
-	public String getTeamA() {
-		return teamA;
-	}
-
-
-
-
-	public void setTeamA(String teamA) {
-		this.teamA = teamA;
-	}
-
-
-
-
-	public String getTeamB() {
-		return teamB;
-	}
-
-
-
-
-	public void setTeamB(String teamB) {
-		this.teamB = teamB;
-	}
-
-
 
 
 	public String getVenue() {
@@ -135,13 +66,19 @@ public class Match {
 	}
 
 
-
-
 	public void setVenue(String venue) {
 		this.venue = venue;
 	}
 
 
+	public Date getDate() {
+		return date;
+	}
+
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
 
 
 	public String getPlayerOfMatch() {
@@ -149,13 +86,9 @@ public class Match {
 	}
 
 
-
-
 	public void setPlayerOfMatch(String playerOfMatch) {
 		this.playerOfMatch = playerOfMatch;
 	}
-
-
 
 
 	public String getResultWin() {
@@ -163,13 +96,9 @@ public class Match {
 	}
 
 
-
-
 	public void setResultWin(String resultWin) {
 		this.resultWin = resultWin;
 	}
-
-
 
 
 	public String getWinByRuns() {
@@ -177,39 +106,50 @@ public class Match {
 	}
 
 
-
-
 	public void setWinByRuns(String winByRuns) {
 		this.winByRuns = winByRuns;
 	}
 
 
-
-
-	public Match(int id, int matchId, String teamA, String teamB, String venue, String playerOfMatch, String resultWin,
-			String winByRuns, Date date) {
-		super();
-		this.id = id;
-		this.matchId = matchId;
-		this.teamA = teamA;
-		this.teamB = teamB;
-		this.venue = venue;
-		this.playerOfMatch = playerOfMatch;
-		this.resultWin = resultWin;
-		this.winByRuns = winByRuns;
-		this.date = date;
+	public List<Team> getTeams() {
+		return teams;
 	}
 
 
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
+	}
+
+	
+	
+	
+
+	public Match(int id, String venue, Date date, String playerOfMatch, String resultWin, String winByRuns,
+			List<Team> teams) {
+		super();
+		this.id = id;
+		this.venue = venue;
+		this.date = date;
+		this.playerOfMatch = playerOfMatch;
+		this.resultWin = resultWin;
+		this.winByRuns = winByRuns;
+		this.teams = teams;
+	}
 
 
 	@Override
 	public String toString() {
-		return "Match [date=" + date + "]";
+		return "Match [id=" + id + ", venue=" + venue + ", date=" + date + ", playerOfMatch=" + playerOfMatch
+				+ ", resultWin=" + resultWin + ", winByRuns=" + winByRuns + ", teams=" + teams + "]";
 	}
-    
-    
+	
+	
+	
+	
+	
 
+  
+ 
 
 	
 
