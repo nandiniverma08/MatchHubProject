@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.matchhub.dto.MatchDetailsDto;
+import com.matchhub.dto.TeamDetailsWinLossDto;
 import com.matchhub.entities.Match;
 import com.matchhub.service.MatchService;
 
@@ -55,6 +56,17 @@ public class MatchController {
 			Match updated = matchService.updateMatchDetails(existingMatch);
 
 			return new ResponseEntity<>(updated, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@GetMapping("/getTeamDetails/{teamId}")
+	public ResponseEntity<TeamDetailsWinLossDto> getTeamDetails(@PathVariable("teamId") int teamId) {
+		TeamDetailsWinLossDto teamDetailsWinLossDto = matchService.getTeamDetailsWinLossByTeamId(teamId);
+
+		if (teamDetailsWinLossDto != null) {
+			return new ResponseEntity<>(teamDetailsWinLossDto, HttpStatus.OK);
 		} else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}

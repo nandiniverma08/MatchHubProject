@@ -3,16 +3,19 @@ package com.matchhub.serviceImpl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.matchhub.dto.MatchDetailsDto;
 import com.matchhub.dto.TeamDetailsDto;
+import com.matchhub.dto.TeamDetailsWinLossDto;
 import com.matchhub.entities.Match;
 import com.matchhub.entities.Team;
 import com.matchhub.entities.TeamDetails;
 import com.matchhub.repository.MatchRepository;
+import com.matchhub.repository.TeamDetailsRepository;
 import com.matchhub.service.MatchService;
 
 @Service
@@ -20,6 +23,9 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private MatchRepository matchRepository;
+	
+    @Autowired
+    private TeamDetailsRepository teamDetailsRepository;
 
 	@Override
 	public Match addMatch(Match match) {
@@ -69,32 +75,32 @@ public class MatchServiceImpl implements MatchService {
 		return matchDetailsDto;
 
 	}
-//
-//	@Override
-//	public ResponseEntity<Match> updateMatchDetails(int matchId, Match updatedMatch) {
-//		Match existingMatch = matchRepository.findById(matchId)
-//				.orElseThrow(() -> new RuntimeException("Match not found with ID: " + matchId));
-//
-//		// Update the fields
-//		existingMatch.setPlayerOfMatch(updatedMatch.getPlayerOfMatch());
-//		existingMatch.setResultWin(updatedMatch.getResultWin());
-//
-//		// Save the updated match
-//		matchRepository.save(existingMatch);
-//
-//		return new ResponseEntity<>(existingMatch, HttpStatus.OK);
-//	}
 
 	@Override
 	public Match getMatchById(int matchId) {
-	    return matchRepository.findById(matchId).orElse(null);
+		return matchRepository.findById(matchId).orElse(null);
 	}
 
+	@Override
+	public Match updateMatchDetails(Match match) {
+		// You might want to add some validation or business logic here before updating
+		return matchRepository.save(match);
+	}
 
-	 @Override
-	    public Match updateMatchDetails(Match match) {
-	        // You might want to add some validation or business logic here before updating
-	        return matchRepository.save(match);
-	    }
+	@Override
+	public TeamDetailsWinLossDto getTeamDetailsWinLossByTeamId(int teamId) {
+		Optional<TeamDetails> teamDetailsOptional = teamDetailsRepository.findByTeam_TeamId(teamId);
+
+		if (teamDetailsOptional.isPresent()) {
+			TeamDetails teamDetails = teamDetailsOptional.get();
+
+			int totalWins = teamDetails.getTotalWin();
+			int totalLosses = teamDetails.getTotalLoss();
+
+			return new TeamDetailsWinLossDto(totalWins, totalLosses);
+		} else {
+			return null;
+		}
+	}
 
 }

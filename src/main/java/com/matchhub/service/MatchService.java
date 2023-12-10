@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.matchhub.dto.MatchDetailsDto;
+import com.matchhub.dto.TeamDetailsWinLossDto;
 import com.matchhub.entities.Match;
 
 public interface MatchService {
@@ -19,6 +20,8 @@ public interface MatchService {
 	Match getMatchById(int matchId);
 
 	Match updateMatchDetails(Match existingMatch);
+
+	TeamDetailsWinLossDto getTeamDetailsWinLossByTeamId(int teamId);
 
 	
 
