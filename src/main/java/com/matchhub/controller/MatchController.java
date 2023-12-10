@@ -5,9 +5,12 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -28,16 +31,33 @@ public class MatchController {
 	}
 
 	@GetMapping("/listMatchesByDate")
-	public List<Match> getMatchesByDate(@RequestParam("matchDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date matchDate) {
-	    return matchService.getMatchesByDate(matchDate);
+	public List<Match> getMatchesByDate(
+			@RequestParam("matchDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date matchDate) {
+		return matchService.getMatchesByDate(matchDate);
 	}
 
-
 	@GetMapping("/getMatchDetailsById/{matchId}")
-    public MatchDetailsDto getMatchDetailsById(@PathVariable("matchId") int matchId) {
-        return matchService.getMatchDetailsById(matchId);
-    }
+	public MatchDetailsDto getMatchDetailsById(@PathVariable("matchId") int matchId) {
+		return matchService.getMatchDetailsById(matchId);
+	}
 
+	@PutMapping("/updateMatchDetails/{matchId}")
+	public ResponseEntity<Match> updateMatchDetails(@PathVariable("matchId") int matchId,
+			@RequestBody Match updatedMatch) {
+		Match existingMatch = matchService.getMatchById(matchId);
 
+		if (existingMatch != null) {
+			// Update the fields you want to modify
+			existingMatch.setPlayerOfMatch(updatedMatch.getPlayerOfMatch());
+			existingMatch.setResultWin(updatedMatch.getResultWin());
+
+			// Save the updated match
+			Match updated = matchService.updateMatchDetails(existingMatch);
+
+			return new ResponseEntity<>(updated, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
 
 }

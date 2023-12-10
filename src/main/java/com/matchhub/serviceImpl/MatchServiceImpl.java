@@ -40,7 +40,6 @@ public class MatchServiceImpl implements MatchService {
 		return convertToMatchDetailsDto(match);
 	}
 
-
 	private MatchDetailsDto convertToMatchDetailsDto(Match match) {
 
 		MatchDetailsDto matchDetailsDto = new MatchDetailsDto();
@@ -70,5 +69,32 @@ public class MatchServiceImpl implements MatchService {
 		return matchDetailsDto;
 
 	}
+//
+//	@Override
+//	public ResponseEntity<Match> updateMatchDetails(int matchId, Match updatedMatch) {
+//		Match existingMatch = matchRepository.findById(matchId)
+//				.orElseThrow(() -> new RuntimeException("Match not found with ID: " + matchId));
+//
+//		// Update the fields
+//		existingMatch.setPlayerOfMatch(updatedMatch.getPlayerOfMatch());
+//		existingMatch.setResultWin(updatedMatch.getResultWin());
+//
+//		// Save the updated match
+//		matchRepository.save(existingMatch);
+//
+//		return new ResponseEntity<>(existingMatch, HttpStatus.OK);
+//	}
+
+	@Override
+	public Match getMatchById(int matchId) {
+	    return matchRepository.findById(matchId).orElse(null);
+	}
+
+
+	 @Override
+	    public Match updateMatchDetails(Match match) {
+	        // You might want to add some validation or business logic here before updating
+	        return matchRepository.save(match);
+	    }
 
 }

@@ -14,6 +14,12 @@ public interface MatchService {
 
 	MatchDetailsDto getMatchDetailsById(int matchId);
 
+
+
+	Match getMatchById(int matchId);
+
+	Match updateMatchDetails(Match existingMatch);
+
 	
 
 	
