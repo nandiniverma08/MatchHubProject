@@ -6,11 +6,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.matchhub.dto.MatchDetailsDto;
 import com.matchhub.entities.Match;
 import com.matchhub.service.MatchService;
 
@@ -29,6 +31,12 @@ public class MatchController {
 	public List<Match> getMatchesByDate(@RequestParam("matchDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date matchDate) {
 	    return matchService.getMatchesByDate(matchDate);
 	}
+
+
+	@GetMapping("/getMatchDetailsById/{matchId}")
+    public MatchDetailsDto getMatchDetailsById(@PathVariable("matchId") int matchId) {
+        return matchService.getMatchDetailsById(matchId);
+    }
 
 
 
