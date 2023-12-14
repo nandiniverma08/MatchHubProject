@@ -23,7 +23,7 @@ public class MatchServiceImpl implements MatchService {
 
 	@Autowired
 	private MatchRepository matchRepository;
-	
+
     @Autowired
     private TeamDetailsRepository teamDetailsRepository;
 
@@ -82,8 +82,7 @@ public class MatchServiceImpl implements MatchService {
 	}
 
 	@Override
-	public Match updateMatchDetails(Match match) {
-		// You might want to add some validation or business logic here before updating
+	public Match updateMatchDetails(Match match) {		
 		return matchRepository.save(match);
 	}
 
@@ -103,5 +102,5 @@ public class MatchServiceImpl implements MatchService {
 		}
 	}
 
-	
+
 }

@@ -10,7 +10,7 @@ import com.matchhub.entities.Match;
 
 @Repository
 public interface MatchRepository extends JpaRepository<Match, Integer> {
-	
+
 	List<Match> findByDate(Date matchDate);
 
 

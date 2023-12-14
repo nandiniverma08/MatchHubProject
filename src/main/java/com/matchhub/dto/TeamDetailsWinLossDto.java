@@ -7,16 +7,16 @@ public class TeamDetailsWinLossDto {
 
 	private int totalWin;
 	private int totalLosse;
-	
 
-	
+
+
 	public TeamDetailsWinLossDto(int totalWin, int totalLosse) {
 		super();
 		this.totalWin = totalWin;
 		this.totalLosse = totalLosse;
 	}
-	
-	
+
+
 	public int getTotalWin() {
 		return totalWin;
 	}
@@ -29,8 +29,8 @@ public class TeamDetailsWinLossDto {
 	public void setTotalLosse(int totalLosse) {
 		this.totalLosse = totalLosse;
 	}
-	
-	
-	
+
+
+
 
 }

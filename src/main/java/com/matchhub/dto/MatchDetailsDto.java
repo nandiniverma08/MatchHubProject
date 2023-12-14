@@ -10,8 +10,8 @@ public class MatchDetailsDto {
 	private String venue;
 	private String playerOfMatch;
 	private List<TeamDetailsDto> teams;
-	
-	
+
+
 	public String getVenue() {
 		return venue;
 	}
@@ -30,10 +30,10 @@ public class MatchDetailsDto {
 	public void setTeams(List<TeamDetailsDto> teams) {
 		this.teams = teams;
 	}
-	
-	
-	
-	
-	
+
+
+
+
+
 
 }

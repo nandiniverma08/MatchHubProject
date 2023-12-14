@@ -35,14 +35,14 @@ public class TeamDetails {
 
 	@Column(name = "team_rank")
 	private int teamRank;
-	
+
 	@Column(name = "total_win")
 	private int totalWin;
-	
+
 	@Column(name = "total_loss")
 	private int totalLoss;
-	
-	
+
+
 	@OneToOne
 	@JoinColumn(name = "team_id")
 	private Team team;
@@ -50,9 +50,9 @@ public class TeamDetails {
 	public TeamDetails() {
 
 	}
-	
-	
-		
+
+
+
 
 	public TeamDetails(int totalWin, int totalLoss) {
 		super();
@@ -77,7 +77,7 @@ public class TeamDetails {
 		this.totalLoss = totalLoss;
 	}
 
-	
+
 
 	public int getTeamDetailsId() {
 		return teamDetailsId;

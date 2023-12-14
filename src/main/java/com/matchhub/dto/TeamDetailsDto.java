@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class TeamDetailsDto {
-	
+
 	private int teamId;
     private String teamName;
     private String captain;
@@ -12,9 +12,9 @@ public class TeamDetailsDto {
     private String batsman;
     private String bowler;
     private int teamRank;
-    
-    
-    
+
+
+
 	public int getTeamId() {
 		return teamId;
 	}
@@ -57,9 +57,9 @@ public class TeamDetailsDto {
 	public void setTeamRank(int teamRank) {
 		this.teamRank = teamRank;
 	}
-    
-    
-    
-    
+
+
+
+
 
 }
