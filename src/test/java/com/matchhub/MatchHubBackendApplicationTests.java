@@ -34,18 +34,18 @@ class MatchHubBackendApplicationTests {
         match.setDate(new Date());
         match.setPlayerOfMatch("Sample Player");
         match.setResultWin("Sample Result");
-        match.setWinByRuns("10 runs");  // Assuming winByRuns is a String in your entity
-        // Set other necessary fields...
+        match.setWinByRuns("10 runs");  
         
         
-     // Create a Team object with sample data
+        
+     // Create a Team object
         Team team = new Team();
         team.setTeamId(134);
         team.setTeamName("Sample Team");
         team.setMatch(match);
         
         
-        // Create a TeamDetails object with sample data
+        // Create a TeamDetails object 
         TeamDetails teamDetails = new TeamDetails();
         teamDetails.setTeamDetailsId(140);
         teamDetails.setCaptain("Captain Name");
